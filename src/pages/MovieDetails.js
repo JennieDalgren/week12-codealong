@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
+import { BackArrow } from 'icons/BackArrow'
 
 export const MovieDetails = () => {
   const [movie, setMovie] = useState()
-  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState()
+  const [loading, setLoading] = useState(true)
   const { id } = useParams()
 
   useEffect(() => {
@@ -13,7 +15,12 @@ export const MovieDetails = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        setMovie(json)
+        if (json.status_code === 34) {
+          setError('Movie not found')
+        } else {
+          setMovie(json)
+        }
+
         setLoading(false)
       })
   }, [id]) // We need to pass id as a dependecy here so everytime the id changes, we do a new fetch.
@@ -22,9 +29,17 @@ export const MovieDetails = () => {
     return <h1>LOADING</h1>
   }
 
-  if (!movie) {
-    return <h1>no movie</h1>
+  if (error) {
+    return <h1>{error}</h1>
   }
 
-  return <div>{movie && <div>{movie.title}</div>}</div>
+  return (
+    <div>
+      <Link to="/" className="backLink">
+        <BackArrow />
+        Back
+      </Link>
+      <h1>{movie.title}</h1>
+    </div>
+  )
 }
