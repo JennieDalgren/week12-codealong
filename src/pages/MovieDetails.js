@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 export const MovieDetails = () => {
   const [movie, setMovie] = useState()
@@ -11,8 +11,8 @@ export const MovieDetails = () => {
     fetch(
       `https://api.themoviedb.org/3/movie/${id}?api_key=0a7bdc5f7b44e6a5230c95a3dbb9bbbc&language=en-US&page=1`
     )
-      .then(res => res.json())
-      .then(json => {
+      .then((res) => res.json())
+      .then((json) => {
         setMovie(json)
         setLoading(false)
       })
