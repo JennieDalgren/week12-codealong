@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
-export const MovieList = () => {
+export const MovieList = ({ category = 'popular' }) => {
   const [movies, setMovies] = useState([])
-  const [category, setCategory] = useState('popular')
+  // const [category, setCategory] = useState('popular')
+  const history = useHistory()
 
   useEffect(() => {
     fetch(
@@ -15,7 +16,7 @@ export const MovieList = () => {
 
   return (
     <div>
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+      <select value={category} onChange={(e) => history.push(`/${e.target.value}`)}>
         <option value="popular">Popular</option>
         <option value="top_rated">Top Rated</option>
         <option value="upcoming">Upcoming</option>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useHistory } from 'react-router-dom'
 import { BackArrow } from 'icons/BackArrow'
 
 export const MovieDetails = () => {
@@ -7,6 +7,7 @@ export const MovieDetails = () => {
   const [error, setError] = useState()
   const [loading, setLoading] = useState(true)
   const { id } = useParams()
+  const history = useHistory()
 
   useEffect(() => {
     setLoading(true)
@@ -35,10 +36,10 @@ export const MovieDetails = () => {
 
   return (
     <div>
-      <Link to="/" className="backLink">
+      <button onClick={() => history.goBack()} className="backLink">
         <BackArrow />
         Back
-      </Link>
+      </button>
       <h1>{movie.title}</h1>
     </div>
   )

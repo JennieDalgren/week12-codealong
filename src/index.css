@@ -20,6 +20,9 @@ code {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+  appearance: none;
+  border: none;
+  background: none;
 }
 
 .backLink:hover svg {
